@@ -46,12 +46,8 @@ posts = [
 
 
 def index(request):
-    for i in range(len(posts)):
-        a = posts[i]['text'].split()
-        b = ' '.join(a[:10]) 
-        posts[i]['short_text'] = b 
     template_name = 'blog/index.html'
-    context = {'all_post': posts}
+    context = {'all_post': reversed(posts)}
     return render(request, template_name, context)
 
 
