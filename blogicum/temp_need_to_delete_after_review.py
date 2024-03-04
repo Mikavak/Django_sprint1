@@ -1,6 +1,3 @@
-from django.shortcuts import render
-# Create your views here.
-
 posts = [
     {
         'id': 0,
@@ -43,25 +40,11 @@ posts = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
+# a = posts[0]['text'].split()
+# print(a[:10])
+for _ in range(len(posts)):
+    a = posts[_]['text'].split()
+    b = ' '.join(a[:10]) 
+    posts[_]['short_text'] = b
 
-
-def index(request):
-    for i in range(len(posts)):
-        a = posts[i]['text'].split()
-        b = ' '.join(a[:10]) 
-        posts[i]['short_text'] = b 
-    template_name = 'blog/index.html'
-    context = {'all_post': posts}
-    return render(request, template_name, context)
-
-
-def post_detail(request, id):
-    context = {'post': posts[id]}
-    template_name = 'blog/detail.html'
-    return render(request, template_name, context)
-
-
-def category_posts(request, category_slug):
-    context = {'category': category_slug}
-    template_name = 'blog/category.html'
-    return render(request, template_name, context)
+print(posts)
