@@ -14,7 +14,7 @@ posts: list = [
                 который назвал островом Отчаяния.''',
     },
     {
-        'id': 1,
+        'id': 11,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
         'category': 'not-my-day',
@@ -50,10 +50,7 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    for i in posts:
-        if i['id'] == post_id:
-            detail_post = i
-    context = {'post': detail_post}
+    context = {'post': post for post in posts if post['id'] == post_id}
     return render(request, 'blog/detail.html', context)
 
 
