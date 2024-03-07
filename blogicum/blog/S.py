@@ -1,7 +1,5 @@
-from django.shortcuts import render
-from typing import Union
-
-posts: list[dict[str, Union[int, str]]] = [
+import pprint
+posts = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -47,17 +45,4 @@ posts: list[dict[str, Union[int, str]]] = [
 
 post_dict = {post['id']: post for post in posts}
 
-
-def index(request):
-    context = {'all_posts': reversed(posts)}
-    return render(request, 'blog/index.html', context)
-
-
-def post_detail(request, post_id):
-    context = {'post': post_dict.get(post_id)}
-    return render(request, 'blog/detail.html', context)
-
-
-def category_posts(request, category_slug):
-    context = {'category': category_slug}
-    return render(request, 'blog/category.html', context)
+pprint.pprint(post_dict)
