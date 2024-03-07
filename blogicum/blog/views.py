@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from typing import Union
 
-posts: list = [
+posts: list[dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -14,7 +15,7 @@ posts: list = [
                 который назвал островом Отчаяния.''',
     },
     {
-        'id': 1,
+        'id': 11,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
         'category': 'not-my-day',
@@ -44,13 +45,18 @@ posts: list = [
 ]
 
 
+work_dict = dict()
+for count, i in enumerate(posts):
+    work_dict[i['id']] = posts[count]
+
+
 def index(request):
     context = {'all_post': reversed(posts)}
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, post_id):
-    context = {'post': post for post in posts if post['id'] == post_id}
+    context = {'post': work_dict.get(post_id)}
     return render(request, 'blog/detail.html', context)
 
 
